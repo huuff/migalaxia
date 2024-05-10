@@ -1,4 +1,4 @@
-import React from "react";
+import {useState}  from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Componentes
@@ -15,73 +15,64 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 
 library.add(fas, far);
 
-class App extends React.Component {
-  
-  constructor() {
-    super();
-
-    this.state = {
-      mode: "dark"
-    };
-  }
-
-  router = createBrowserRouter([
+const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Bienvenido/>
+        path: "/",
+        element: <Bienvenido/>
     },
     {
-      path: "/aprender",
-      element: <Aprender/>
+        path: "/aprender",
+        element: <Aprender/>
     },
     {
-      path: "/jugar",
-      element: <Jugar/>
+        path: "/jugar",
+        element: <Jugar/>
     },
     {
-      path: "/foto",
-      element: <FotoDelDia/>
+        path: "/foto",
+        element: <FotoDelDia/>
     },
     {
-      path: "/noticias",
-      element: <Noticias/>
+        path: "/noticias",
+        element: <Noticias/>
     }
-  ]);
+]);
 
-  changeMode(elemento) {
-    const body = document.getElementsByTagName("body")[0];
-    const classList = document.getElementById("cabecera").classList;
+const App = () => {
+    const [app, setApp] = useState({ mode: "dark" });
 
-    if (this.state.mode === "dark") {
-      this.setState({mode: "light"});
-      body.setAttribute("data-bs-theme", "light");
+    const path = router.state.location.pathname;
+    function changeMode(elemento) {
+        const body = document.getElementsByTagName("body")[0];
+        const classList = document.getElementById("cabecera").classList;
+
+        if (app.mode === "dark") {
+            setApp({mode: "light"});
+            body.setAttribute("data-bs-theme", "light");
       
-      classList.remove("gradient-dark");
-      classList.add("gradient-light");
+            classList.remove("gradient-dark");
+            classList.add("gradient-light");
 
-      elemento.textContent = "Cambiar a modo oscuro";
-    }
-    else {
-      this.setState({mode: "dark"});
-      body.setAttribute("data-bs-theme", "dark");
+            elemento.textContent = "Cambiar a modo oscuro";
+        }
+        else {
+            setApp({mode: "dark"});
+            body.setAttribute("data-bs-theme", "dark");
       
-      classList.remove("gradient-light");
-      classList.add("gradient-dark");
+            classList.remove("gradient-light");
+            classList.add("gradient-dark");
 
-      elemento.textContent = "Cambiar a modo claro";
-    }
-    
-  }
+            elemento.textContent = "Cambiar a modo claro";
+        }
+    } 
 
-  render() {
-    const path = this.router.state.location.pathname;
     return (
-      <>
-        <Cabecera app={this} path={path}/>
-        <RouterProvider router={this.router}/>
-      </>
+        <>
+            <Cabecera app={app} changeMode={changeMode} path={path}/>
+            <RouterProvider router={router}/>
+        </>
     )
-  }
-}
+};
+
 export default App;
   

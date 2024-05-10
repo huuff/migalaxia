@@ -43,7 +43,7 @@ function Cabecera(props) {
   
 
   const changeMode = (e) => {
-    props.app.changeMode(e.target);
+    props.changeMode(e.target);
   }
 
     return (
