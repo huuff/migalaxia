@@ -1,8 +1,6 @@
-import {useState}  from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Componentes
-import Cabecera from "./Components/Cabecera.js";
 import Noticias from "./Components/Noticias.js";
 import Root from "./Components/Root.jsx";
 import Bienvenido from "./Components/Bienvenido.js";
