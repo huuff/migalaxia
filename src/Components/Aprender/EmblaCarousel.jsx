@@ -1,15 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
+import sunImage from './sun.jpg';
+import mercurioImage from './mercurio.jpg';
 
 const EmblaCarousel = (props) => {
-  const { slides, options } = props
+  const {options } = props
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: 'keepSnaps',
     dragFree: true
   })
+
+  const slides = [
+    { imageUrl: sunImage},
+    {imageUrl: mercurioImage}
+  ];
 
   const onThumbClick = useCallback(
     (index) => {
@@ -36,9 +43,9 @@ const EmblaCarousel = (props) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaMainRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((slide,index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">{index + 1}</div>
+              <img src={slide.imageUrl} alt={`Slide ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           ))}
         </div>
@@ -47,7 +54,7 @@ const EmblaCarousel = (props) => {
       <div className="embla-thumbs">
         <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
-            {slides.map((index) => (
+            {slides.map((slide,index) => (
               <Thumb
                 key={index}
                 onClick={() => onThumbClick(index)}
