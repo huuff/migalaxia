@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
-import sunImage from './sun.jpg';
-import mercurioImage from './mercurio.jpg';
+import { Link } from 'react-router-dom';
+
+
+
 
 const EmblaCarousel = (props) => {
-  const {options } = props
+  const {options, slides} = props
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options)
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
@@ -13,10 +15,6 @@ const EmblaCarousel = (props) => {
     dragFree: true
   })
 
-  const slides = [
-    { imageUrl: sunImage},
-    {imageUrl: mercurioImage}
-  ];
 
   const onThumbClick = useCallback(
     (index) => {
@@ -41,11 +39,12 @@ const EmblaCarousel = (props) => {
 
   return (
     <div className="embla">
-      <div className="embla__viewport" ref={emblaMainRef}>
+      <div className="embla__viewport" ref={emblaMainRef} style={{maxWidth: "70%", margin: "0 auto"}}>
         <div className="embla__container">
           {slides.map((slide,index) => (
-            <div className="embla__slide" key={index}>
-              <img src={slide.imageUrl} alt={`Slide ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div className="embla__slide" key={index} style={{maxWidth: "400px"}}>
+              <img src={slide.imageUrl} alt={`Slide ${index + 1}`} style={{ width: '100%', height: '400px' }} />
+              <Link to= {slide.path} style= {{display: "block"}} aria-label={'Más información sobre ' + slide.name}>Más información</Link>
             </div>
           ))}
         </div>
@@ -59,7 +58,7 @@ const EmblaCarousel = (props) => {
                 key={index}
                 onClick={() => onThumbClick(index)}
                 selected={index === selectedIndex}
-                index={index}
+                name={slide.name}
               />
             ))}
           </div>

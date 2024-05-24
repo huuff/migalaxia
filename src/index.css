@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
@@ -19,27 +18,34 @@ code {
   font-weight: bold;
 }
 
-/* Textos para modo claro y modo oscuro */
-.text-normal-light {
-  color: black;
+/* Estilos especificos del modo claro */
+[data-bs-theme=light] {
+  .text-secondary {
+    color:rgb(87, 87, 87);
+  }
+
+  .link-secondary {
+    color:rgb(87, 87, 87);
+  }
 }
 
-.text-normal-dark {
-  color: white;
+/* Estilos especificos del modo oscuro */
+[data-bs-theme=dark] {
+  .text-secondary-dark {
+    color:rgb(172, 172, 172);
+  }
+
+  .link-secondary {
+    color:rgb(172, 172, 172);
+  }
 }
 
-.text-secondary-light {
-  color:rgb(87, 87, 87);
+
+/*Esta parte de aqui es para hacer que los botones del carrusel cambien de modo claro a oscuro*/
+:root {
+  --border-color: black; /* Default to black for light mode */
 }
 
-.text-secondary-dark {
-  color:rgb(172, 172, 172);
-}
-
-.link-secondary-light {
-  color:rgb(87, 87, 87);
-}
-
-.link-secondary-dark {
-  color:rgb(172, 172, 172);
+[data-bs-theme= dark] {
+  --border-color: white; /* Set to white for dark mode */
 }
