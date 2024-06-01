@@ -1,18 +1,15 @@
 class Palabra {
     
-    constructor(letra, palabra, definicion, empieza) {
+    constructor(letra, palabra, definicion, empieza, tipo) {
         this.letra = letra.toUpperCase();
 
         this.palabra = this.minusculasSinTildes(palabra);
 
         this.definicion = definicion;        
 
-        if (empieza == null) {
-            this.empieza = true;
-        }
-        else {
-            this.empieza = false;
-        }
+        this.empieza = (empieza == null) || empieza;
+
+        this.tipo = tipo == null ? "Palabra" : tipo;
 
         this.intentos = 3;
 
@@ -24,13 +21,12 @@ class Palabra {
     }
 
     getHeading() {
-        let heading;
-        if (this.empieza) {
-            heading = "Empieza por la '" + this.letra + "'";
-        }
-        else {
-            heading = "Contiene la '" + this.letra + "'";
-        }
+        let heading = this.tipo + " que ";
+
+        if (this.empieza) heading += "empieza por la ";
+        else heading += "contiene la ";
+        
+        heading += this.letra;
 
         return heading;
     }
@@ -61,6 +57,18 @@ class Palabra {
 
     getEstado() {
         return this.acertada ? 1 : this.intentos > 0 ? 0 : -1;
+    }
+
+    getLectura() {
+        let lectura = this.tipo + " que ";
+
+        if (this.empieza) lectura += "empieza por la ";
+        else lectura += "contiene la ";
+        
+        lectura += this.letra + ". ";
+        lectura += this.definicion;
+
+        return lectura;
     }
 
     checkPalabra(palabra) {

@@ -16,16 +16,18 @@ function MasFotos() {
     document.title = "Foto del " + formato_fecha;
 
     return(
-        <div className="mx-3">
+        <div id="main" className="mx-3">
             <Navigation actual="Más fotos" paginas={[{nombre: "Foto del día", path:"/foto"}]}/>
             <div className="container-fluid">
-                <div className="row">
-                    <div className="d-flex flex-column justify-content-evenly col-md-4 align-items-center">
-                        <Link className="btn btn-primary btn-lg align-middle my-3" to="../foto">Volver a la foto de hoy</Link>
+                <main className="row">
+                    <div className="d-flex flex-column justify-content-center col-lg-3 align-items-center">
+                        <h3>Elija un día para ver su foto</h3>
                         <Calendar minDate={new Date(fechaInicial)} maxDate={new Date()} onClickDay={setFecha}/>
                     </div>
-                    <VisualizadorFoto fecha={fecha}/>
-                </div>
+                    <VisualizadorFoto fecha={fecha}>
+                        <Link className="btn btn-primary btn-lg align-middle my-3 fs-5" to="../foto">Volver a la foto de hoy</Link>
+                    </VisualizadorFoto>
+                </main>
             </div>
         </div>
     )

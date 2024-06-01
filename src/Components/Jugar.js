@@ -6,7 +6,7 @@ function Juegos() {
   document.title = "Juegos de MiGalaxia";
 
   return (
-    <div>
+    <div id="main">
       <h1 style={{ textAlign: "center", fontWeight: "bold" }}>Juegos</h1>
       <div className="row mx-3">
         <div className="col-12 col-md-6 col-lg-6 mb-3">
@@ -71,7 +71,7 @@ function Juegos() {
             <div className="card-body">
               <h5 className="card-title">Memoria Planetaria</h5>
               <p className="card-text">
-                ¡Descubre el universo mientras emparejas cartas de astronautas, planetas y naves espaciales en este juego de memoria galáctica! ¡Encuentra las parejas antes de que se pierdan en el espacio!
+                ¡Descubre el universo mientras emparejas cartas de planetas en este juego de memoria galáctica! ¡Encuentra las parejas antes de que se pierdan en el espacio!
               </p>
               <Link className="btn btn-primary" to="Memoria">Ir a Memoria Planetaria</Link>
             </div>
